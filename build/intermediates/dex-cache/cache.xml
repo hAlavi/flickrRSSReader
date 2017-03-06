@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a9ee0910f06087df3a882ee5a089af504404cc2c">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0e9d76ef77e9b5d77164fc70f8048d7d01cae268/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.2.0_aa015bdb08e63866094f8e3418860c6e9aa14c94/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.2.0/41e67dba73c3347e4503761642c39d0e06ca1f2/retrofit-2.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="041e67dba73c3347e4503761642c39d0e06ca1f2">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.2.0_4b2a7f3647988db50d01e98d2900395f934d39c0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.6.0_6895a6b1392d7e4662ba36055a40acb1016bf448/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-simplexml/2.2.0/3585dc3d225e2ca03af1a2cece159eb511fa0528/converter-simplexml-2.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3585dc3d225e2ca03af1a2cece159eb511fa0528">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-simplexml-2.2.0_52eb1d58045907ed0d06e0c8651ce013ac9f5af2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/javax.inject-1_31f597bde908e2a7c4950f453813c0dcc234ad1a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.2.0_bcf42d63c31f2e785fe1b262da1a0349ea75722f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="04c60c06663c734d59126d59b88590421b99aac2">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_71c47b1598b7c1cf067f90d27f4a22d374551a9b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30a4938ea5235ccf532b3e9f04200e68547e36ad">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-25.2.0_95d9076430f06ee72ffacd9fd0bd6edda58a9772/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/palette-v7/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9be5e957849eb82ad9addf9bdb2896de8bf5654b">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-palette-v7-25.2.0_5be9dd0131ba9732ab728bf34f6582e6351535d1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.2.0_9a1e5c0a887230300008a748cc54b11d6c41b446/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.10-rc2/e31c0160a45ef08af0cbfbada55f377d902708cf/dagger-2.10-rc2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e31c0160a45ef08af0cbfbada55f377d902708cf">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/dagger-2.10-rc2_f556e91de84392e71910496c367a5aceeefdeb20/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/transition/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.2.0_ef6d1b31b74e55e6374f5020de69309da9fcc34c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.2.0_97238fc5d76ef597a8921d584cde286b3a632829/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.2.0_365c8f541d95ada17175a3926eadad07306569e0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.2.0_c90c0539f8b8002d42e13ee5fd80c7de3466b5ff/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/stax/stax/1.2.0/c434800de5e4bbe1822805be5fb1c32d6834f830/stax-1.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c434800de5e4bbe1822805be5fb1c32d6834f830">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/stax-1.2.0_997f75be836fb6386bc9b16a80de58acb4bed4e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-v13/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="20e6d443b368a3cbcfd9121e6f424708e772967e">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v13-25.2.0_b11d807c6529da06a1c51d896cc109806527b9db/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.11.0/840897fcd7223a8143f1d9b6f69714e7be34fd50/okio-1.11.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.11.0_54f576f44f27f04f969996a2655bc51bf5e9c405/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.4.0/f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2/picasso-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.4.0_aede4ebb401c450ce6c540db7960cc67850c0e22/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.2.0_3b148db330cfedb58957f90b905349960b775c50/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/.gradle/caches/modules-2/files-2.1/org.simpleframework/simple-xml/2.7.1/dd91fb744c2ff921407475cb29a1e3fee397d411/simple-xml-2.7.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="dd91fb744c2ff921407475cb29a1e3fee397d411">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/simple-xml-2.7.1_85fa6a9b516943ab7afb59d357f9b8b145c5fbce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.2.0_606dbb8695311a193964b6bb545496fc404fd9da/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.2.0_96d63b13efd07dc7ce547807132d6fb2c3761352/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.2.0_ebf90873af32ec08f1ec7a196c08aa69681aba83/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.2.0_97e8015793591a10270112586eecbf62ab7cdfdd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="/Users/rouhalavi/Desktop/flickrRSSReader/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.2.0_61c5a16a5d202aa523fe6a18c8d5716c31656e10/classes.dex" />
+    </item>
+
+</items>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Flickr RSSReader</string>
+    <string name="postTitle">[Title]</string>
+    <string name="postedByName">[Posted By]</string>
+    <string name="publishedDateLabel">Published:</string>
+    <string name="updatedDateLabel">Updated:</string>
+
+    <string name="sortByPubDate">Sort by published date</string>
+    <string name="sortByUpdDate">Sort by update date</string>
+    <string name="sortByPublisher">Sort by publisher</string>
+    <string name="sortByTitle">Sort by title</string>
+</resources>
