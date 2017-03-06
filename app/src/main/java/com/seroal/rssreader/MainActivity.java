@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvFeed;
     SwipeRefreshLayout swLayout;
 
+    Retrofit retrofit;
+    OkHttpClient okClient;
+    RssAdapter rssAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,23 +60,28 @@ public class MainActivity extends AppCompatActivity {
         rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
 
         setupFeed();
-        buildRetrofit();
+        initializeConnections();
+        requestUpdate();
 
 
+        SwipeInitialize();
     }
+    private void initializeConnections() {
 
+        okClient = new OkHttpClient.Builder().build();
 
-    private void buildRetrofit(){
-
-        OkHttpClient okClient = new OkHttpClient.Builder().build();
-
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.flickr.com")
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .client(okClient)
                 .build();
 
-        RssAdapter rssAdapter = retrofit.create(RssAdapter.class);
+        rssAdapter = retrofit.create(RssAdapter.class);
+
+    }
+
+    private void requestUpdate(){
+
 
         Call<RssFeed> call = rssAdapter.getItems();
         call.enqueue(new Callback<RssFeed>() {
@@ -208,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                buildRetrofit();
+                requestUpdate();
             }
         });
     }
