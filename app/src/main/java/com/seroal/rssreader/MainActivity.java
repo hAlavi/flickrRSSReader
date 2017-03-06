@@ -17,14 +17,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.Retrofit.Builder;
 import retrofit2.Callback;
 import retrofit2.Call;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
@@ -33,7 +30,7 @@ import com.seroal.rssreader.model.RssAdapter;
 import com.seroal.rssreader.model.RssFeed;
 import com.seroal.rssreader.model.FeedItem;
 import com.seroal.rssreader.view.RecyclerViewAdapter;
-import com.seroal.rssreader.view.ViewModel;
+import com.seroal.rssreader.view.ViewHolder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +81,20 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getAuthor().getName() ,Toast.LENGTH_LONG).show();
                 swLayout.setRefreshing(false);
+
+
+
+                RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(response.body().getFeedItems());
+
+                feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(View view, ViewHolder viewHolder){
+                        Toast.makeText(getApplicationContext(), "test",Toast.LENGTH_LONG).show();
+                    }
+                });
+                rvFeed.setAdapter(feedAdapter);
+
+
             }
 
             @Override
@@ -168,18 +179,15 @@ public class MainActivity extends AppCompatActivity {
 
         rvFeed.setLayoutManager(linearLayoutManager);
 
-        List<ViewModel> items = new ArrayList<>();
-
-        items.add(new ViewModel("x","y","z","r"));
-        items.add(new ViewModel("a","b","c","d"));
+        List<FeedItem> items = new ArrayList<>();
 
 
         RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(items);
 
         feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(View view, ViewModel viewModel){
-                Toast.makeText(getApplicationContext(),viewModel.getTitle(),Toast.LENGTH_LONG).show();
+            public void onItemClick(View view, ViewHolder viewHolder){
+                Toast.makeText(getApplicationContext(), "test",Toast.LENGTH_LONG).show();
             }
         });
         rvFeed.setAdapter(feedAdapter);

@@ -124,6 +124,10 @@ public class FeedItem implements Serializable {
         public String getScheme() {
             return scheme;
         }
+
+        public String toString(){
+            return "#"+ getTerm();
+        }
     }
 
 }
