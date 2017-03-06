@@ -63,8 +63,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.image);
-            text = (TextView) itemView.findViewById(R.id.text);
+            image = (ImageView) itemView.findViewById(R.id.ivFeedCenter);
+            text = (TextView) itemView.findViewById(R.id.tvFeedDetails);
         }
     }
 

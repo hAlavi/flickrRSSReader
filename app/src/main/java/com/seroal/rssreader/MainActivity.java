@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,20 +32,20 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import com.seroal.rssreader.model.RssAdapter;
 import com.seroal.rssreader.model.RssFeed;
 import com.seroal.rssreader.model.FeedItem;
+import com.seroal.rssreader.view.RecyclerViewAdapter;
+import com.seroal.rssreader.view.ViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
 
-
+    RecyclerView rvFeed;
+    SwipeRefreshLayout swLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,13 +54,17 @@ public class MainActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.drawable.ic_share_grey);
         ab.setDisplayHomeAsUpEnabled(false);
 
+        swLayout = (SwipeRefreshLayout)findViewById(R.id.swipeContainer);
+        rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
 
-        BuildRetrofit();
+        setupFeed();
+        buildRetrofit();
+
 
     }
 
 
-    private void BuildRetrofit(){
+    private void buildRetrofit(){
 
         OkHttpClient okClient = new OkHttpClient.Builder().build();
 
@@ -77,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<RssFeed> call, Response<RssFeed> response) {
 
 
-                Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getTitle() ,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getAuthor().getName() ,Toast.LENGTH_LONG).show();
+                swLayout.setRefreshing(false);
             }
 
             @Override
@@ -150,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     private void setupFeed() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
             @Override
@@ -158,21 +165,44 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        /*
+
         rvFeed.setLayoutManager(linearLayoutManager);
 
-        feedAdapter = new (this);
-        feedAdapter.setOnFeedItemClickListener(this);
-        rvFeed.setAdapter(feedAdapter);
-        rvFeed.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        List<ViewModel> items = new ArrayList<>();
+
+        items.add(new ViewModel("x","y","z","r"));
+        items.add(new ViewModel("a","b","c","d"));
+
+
+        RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(items);
+
+        feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                FeedContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
+            public void onItemClick(View view, ViewModel viewModel){
+                Toast.makeText(getApplicationContext(),viewModel.getTitle(),Toast.LENGTH_LONG).show();
             }
         });
-        rvFeed.setItemAnimator(new FeedItemAnimator());
+        rvFeed.setAdapter(feedAdapter);
 
-        */
+
+
+
+        rvFeed.setAdapter(feedAdapter);
+
+
+
+
+    }
+
+
+    private void SwipeInitialize(){
+
+        swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                buildRetrofit();
+            }
+        });
     }
 
 }
