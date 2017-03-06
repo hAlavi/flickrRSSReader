@@ -38,6 +38,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import com.seroal.rssreader.model.RssAdapter;
 import com.seroal.rssreader.model.RssFeed;
 import com.seroal.rssreader.model.FeedItem;
+import com.seroal.rssreader.utils.StorageManager;
 import com.seroal.rssreader.view.RecyclerViewAdapter;
 import com.seroal.rssreader.view.FeedViewHolder;
 
@@ -92,13 +93,14 @@ public class MainActivity extends AppCompatActivity {
     private void requestUpdate(){
 
 
+        swLayout.setRefreshing(true);
         Call<RssFeed> call = rssAdapter.getItems();
         call.enqueue(new Callback<RssFeed>() {
             @Override
             public void onResponse(Call<RssFeed> call, Response<RssFeed> response) {
 
 
-                Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getAuthor().getName() ,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getAuthor().getName() ,Toast.LENGTH_LONG).show();
                 swLayout.setRefreshing(false);
 
 
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(View view, FeedViewHolder feedViewHolder){
                         BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
                         Bitmap bitmap = drawable.getBitmap();
-                        storeImage(bitmap);
+                        StorageManager.storeImage(bitmap);
                         Toast.makeText(getApplicationContext(), "Saved!",Toast.LENGTH_LONG).show();                   }
                 });
                 rvFeed.setAdapter(feedAdapter);
@@ -200,30 +202,6 @@ public class MainActivity extends AppCompatActivity {
 
         rvFeed.setLayoutManager(linearLayoutManager);
 
-        List<FeedItem> items = new ArrayList<>();
-
-
-        RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(items);
-
-        feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
-            @Override
-            public void onItemClick(View view, FeedViewHolder feedViewHolder){
-                BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                storeImage(bitmap);
-                Toast.makeText(getApplicationContext(), "Saved!",Toast.LENGTH_LONG).show();
-            }
-        });
-        rvFeed.setAdapter(feedAdapter);
-
-
-
-
-        rvFeed.setAdapter(feedAdapter);
-
-
-
-
     }
 
 
@@ -237,44 +215,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private  File getOutputMediaFile(){
-
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Android/data/"
-                + getApplicationContext().getPackageName()
-                + "/Files");
-
-
-        // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
-                return null;
-            }
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-        File mediaFile;
-        String mImageName="MI_"+ timeStamp +".jpg";
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
-        return mediaFile;
     }
-
-
-    private void storeImage(Bitmap image) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-
-            return;
-        }
-        try {
-
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            fos.close();
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-
-        }
-    }
-}
