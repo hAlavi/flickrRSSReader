@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> implements View.OnClickListener {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder> implements View.OnClickListener {
 
     private List<FeedItem> items;
     private OnItemClickListener onItemClickListener;
@@ -30,20 +30,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> implem
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false);
         v.setOnClickListener(this);
-        return new ViewHolder(v);
+        return new FeedViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(FeedViewHolder holder, int position) {
         FeedItem item = items.get(position);
-        holder.text.setText(item.getTitle());
+        holder.text.setText(item.getTitle()+" tags :"+item.getTags().toString());
+        holder.tvPubDate.setText(item.getPubDate());
+        holder.tvUserName.setText(item.getAuthor().getName());
+
+        holder.imUser.setImageBitmap(null);
+        Picasso.with(holder.imUser.getContext())
+                .load(item.getAuthor().getIcon())
+                .into(holder.imUser);
+
         holder.image.setImageBitmap(null);
         Picasso.with(holder.image.getContext())
                 .load(item.getLink().get(item.getLink().size()-1).getHref())
                 .into(holder.image);
+
+
         //holder.itemView.setTag(item);
     }
 
@@ -54,14 +64,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
     @Override
     public void onClick(final View v) {
-        onItemClickListener.onItemClick(v, (ViewHolder) v.getTag());
+        onItemClickListener.onItemClick(v, (FeedViewHolder) v.getTag());
     }
 
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, ViewHolder viewHolder);
+        void onItemClick(View view, FeedViewHolder feedViewHolder);
 
     }
 }

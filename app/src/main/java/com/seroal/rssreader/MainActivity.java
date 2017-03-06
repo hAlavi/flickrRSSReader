@@ -1,8 +1,17 @@
 package com.seroal.rssreader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Environment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -30,7 +39,7 @@ import com.seroal.rssreader.model.RssAdapter;
 import com.seroal.rssreader.model.RssFeed;
 import com.seroal.rssreader.model.FeedItem;
 import com.seroal.rssreader.view.RecyclerViewAdapter;
-import com.seroal.rssreader.view.ViewHolder;
+import com.seroal.rssreader.view.FeedViewHolder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,9 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
                 feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
                     @Override
-                    public void onItemClick(View view, ViewHolder viewHolder){
-                        Toast.makeText(getApplicationContext(), "test",Toast.LENGTH_LONG).show();
-                    }
+                    public void onItemClick(View view, FeedViewHolder feedViewHolder){
+                        BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
+                        Bitmap bitmap = drawable.getBitmap();
+                        storeImage(bitmap);
+                        Toast.makeText(getApplicationContext(), "Saved!",Toast.LENGTH_LONG).show();                   }
                 });
                 rvFeed.setAdapter(feedAdapter);
 
@@ -196,8 +207,11 @@ public class MainActivity extends AppCompatActivity {
 
         feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(View view, ViewHolder viewHolder){
-                Toast.makeText(getApplicationContext(), "test",Toast.LENGTH_LONG).show();
+            public void onItemClick(View view, FeedViewHolder feedViewHolder){
+                BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                storeImage(bitmap);
+                Toast.makeText(getApplicationContext(), "Saved!",Toast.LENGTH_LONG).show();
             }
         });
         rvFeed.setAdapter(feedAdapter);
@@ -223,4 +237,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private  File getOutputMediaFile(){
+
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+                + "/Android/data/"
+                + getApplicationContext().getPackageName()
+                + "/Files");
+
+
+        // Create the storage directory if it does not exist
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        File mediaFile;
+        String mImageName="MI_"+ timeStamp +".jpg";
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
+        return mediaFile;
+    }
+
+
+    private void storeImage(Bitmap image) {
+        File pictureFile = getOutputMediaFile();
+        if (pictureFile == null) {
+
+            return;
+        }
+        try {
+
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.close();
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        }
+    }
 }

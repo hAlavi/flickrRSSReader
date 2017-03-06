@@ -102,7 +102,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Publiched Date" />
+                    android:text="Publiched Date"
+                    android:id="@+id/tvPubDate"/>
 
                 <TextView
                     android:layout_width="wrap_content"
