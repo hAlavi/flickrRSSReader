@@ -29,6 +29,7 @@ public class FeedViewHolder extends  RecyclerView.ViewHolder{
         tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
         tvPubDate = (TextView) itemView.findViewById(R.id.tvPubDate);
         text = (TextView) itemView.findViewById(R.id.tvFeedDetails);
+        itemView.setTag(this);
     }
     public String getTitle() {
         return title;

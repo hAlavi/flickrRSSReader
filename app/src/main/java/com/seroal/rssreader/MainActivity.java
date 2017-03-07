@@ -110,10 +110,15 @@ public class MainActivity extends AppCompatActivity {
                 feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener(){
                     @Override
                     public void onItemClick(View view, FeedViewHolder feedViewHolder){
-                        BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
-                        Bitmap bitmap = drawable.getBitmap();
-                        StorageManager.storeImage(bitmap);
-                        Toast.makeText(getApplicationContext(), "Saved!",Toast.LENGTH_LONG).show();                   }
+
+                        if (feedViewHolder!=null)
+                            if (feedViewHolder.image.getDrawable()!=null) {
+                                BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
+                                Bitmap bitmap = drawable.getBitmap();
+                                StorageManager.storeImage(bitmap);
+                                Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_LONG).show();
+                            }
+                    }
                 });
                 rvFeed.setAdapter(feedAdapter);
 
