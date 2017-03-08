@@ -1,19 +1,5 @@
 package com.seroal.rssreader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Environment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -27,36 +13,34 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.Callback;
-import retrofit2.Call;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-import com.seroal.rssreader.model.QueryBuilder;
-import com.seroal.rssreader.model.RssAdapter;
-import com.seroal.rssreader.model.RssFeed;
 import com.seroal.rssreader.model.FeedItem;
+import com.seroal.rssreader.model.RssAdapter;
+import com.seroal.rssreader.presenter.FlickrReedPresenter;
 import com.seroal.rssreader.presenter.SearchField;
 import com.seroal.rssreader.utils.StorageManager;
 import com.seroal.rssreader.view.RecyclerViewAdapter;
-import com.seroal.rssreader.view.FeedViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 
     RecyclerView rvFeed;
     SwipeRefreshLayout swLayout;
+    RecyclerViewAdapter rvAdapter;
+    StorageManager storageManager = StorageManager.getInstance();
 
     Retrofit retrofit;
     OkHttpClient okClient;
     RssAdapter rssAdapter;
-    SearchField sortId= SearchField.NONE;
 
+    FlickrReedPresenter frPresenter = FlickrReedPresenter.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +57,17 @@ public class MainActivity extends AppCompatActivity {
 
         swLayout = (SwipeRefreshLayout)findViewById(R.id.swipeContainer);
         rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
+        List<FeedItem> feedItems = new ArrayList<>();
+        rvAdapter = new RecyclerViewAdapter(getApplicationContext(),feedItems);
+        rvFeed.setAdapter(rvAdapter);
 
-        setupFeed();
+        setupFeedLayout();
         initializeConnections();
-        requestUpdate();
+        injectDependencies();
 
-
-        swipeInitialize();
+        runApp();
     }
+
     private void initializeConnections() {
 
         okClient = new OkHttpClient.Builder().build();
@@ -95,62 +82,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void requestUpdate(String... params){
+    private void injectDependencies(){
+        rvAdapter.injectDevice(storageManager);
 
-
-        swLayout.setRefreshing(true);
-        Call<RssFeed> call;
-        if (params.length!=4) {
-            call = rssAdapter.getItems(QueryBuilder.buildQuery());
-        }else{
-            call = rssAdapter.getItems(QueryBuilder.buildQuery(params[0],params[1],params[2],params[3]));
-
-        }
-        call.enqueue(new Callback<RssFeed>() {
-            @Override
-            public void onResponse(Call<RssFeed> call, Response<RssFeed> response) {
-
-
-                //Toast.makeText(getApplicationContext(),"CallBack"+ " response is " + response.body().getFeedItems().get(2).getAuthor().getName() ,Toast.LENGTH_LONG).show();
-                swLayout.setRefreshing(false);
-
-
-                if (response.body()!=null) {
-                    List<FeedItem> lsFeeds = response.body().getFeedItems();
-                    Collections.sort(lsFeeds, new Comparator<FeedItem>() {
-                        @Override
-                        public int compare(FeedItem lhs, FeedItem rhs) {
-                            if (sortId==SearchField.TITLE)
-                                return lhs.getTitle().compareTo(rhs.getTitle());
-                            if (sortId==SearchField.PUBLISHER)
-                                return lhs.getAuthor().getName().compareTo(rhs.getAuthor().getName());
-                            if (sortId==SearchField.PUB_DATE)
-                                return lhs.getPubDate().compareTo(rhs.getPubDate());
-                            if (sortId==SearchField.UP_DATE)
-                                return lhs.getUpdateDate().compareTo(rhs.getUpdateDate());
-                            return 0;
-                        }
-                    });
-                    RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(lsFeeds);
-                    rvFeed.setAdapter(feedAdapter);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"An Error occured!" + response.toString(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<RssFeed> call, Throwable t) {
-
-                Log.d("CallBack", " Throwable is " +t);
-            }
-        });
-
-
+        frPresenter.inject(getApplicationContext());
+        frPresenter.inject(rssAdapter);
+        frPresenter.inject(rvAdapter);
+        frPresenter.inject(swLayout);
     }
 
-    @Override
+
+    private void runApp(){
+        frPresenter.requestUpdate();
+    }
+
+     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -164,9 +110,8 @@ public class MainActivity extends AppCompatActivity {
         sortTitleItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sortId = SearchField.TITLE;
+                frPresenter.setSearchField(SearchField.TITLE);
                 menuItem.setChecked(true);
-                Log.d("menu", "SortID:"+sortId+"/Item"+menuItem.getItemId());
                 return true;
             }
         });
@@ -174,9 +119,8 @@ public class MainActivity extends AppCompatActivity {
         sortPubItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sortId = SearchField.PUBLISHER;
+                frPresenter.setSearchField(SearchField.PUBLISHER);
                 menuItem.setChecked(true);
-                Log.d("menu", "SortID:"+sortId+"/Item"+menuItem.getItemId());
                 return true;
             }
         });
@@ -184,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
         sortPubDateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sortId = SearchField.PUB_DATE;
+                frPresenter.setSearchField(SearchField.PUB_DATE);
                 menuItem.setChecked(true);
-                Log.d("menu", "SortID:"+sortId+"/Item"+menuItem.getItemId());
                 return true;
             }
         });
@@ -194,9 +137,8 @@ public class MainActivity extends AppCompatActivity {
         sortUpdateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sortId = SearchField.UP_DATE;
+                frPresenter.setSearchField(SearchField.UP_DATE);
                 menuItem.setChecked(true);
-                Log.d("menu", "SortID:"+sortId+"/Item"+menuItem.getItemId());
                 return true;
             }
         });
@@ -209,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                requestUpdate("","",query,"");
+                frPresenter.requestUpdate("","",query,"");
                 searchView.clearFocus();
 
                 return true;
@@ -228,17 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setItemsVisibility(Menu menu, MenuItem exception, boolean visible) {
-        for (int i=0; i<menu.size(); ++i) {
-            MenuItem item = menu.getItem(i);
-            if (item != exception) item.setVisible(visible);
-        }
-    }
-
-
-
-
-    private void setupFeed() {
+    private void setupFeedLayout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
@@ -252,14 +184,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void swipeInitialize(){
 
-        swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                requestUpdate();
-            }
-        });
-    }
-
-    }
+}

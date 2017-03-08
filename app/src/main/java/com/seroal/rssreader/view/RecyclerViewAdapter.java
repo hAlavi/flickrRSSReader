@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
-        implements View.OnClickListener, FeedManageable {
+        implements View.OnClickListener, FeedManageable, ViewAdapter {
 
     private List<FeedItem> items;
     private OnItemClickListener onItemClickListener;
@@ -69,6 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
                 .load(item.getLink().get(item.getLink().size()-1).getHref())
                 .into(holder.image);
 
+        holder.setFeedItem(item);
         holder.inject(this);
 
     }
@@ -94,7 +95,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
     }
 
     public void openFeed(FeedViewHolder feedViewHolder){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(feedViewHolder.getFeedItem().getLink().get(feedViewHolder.getFeedItem().getLink().size()-1).getHref()));
         context.startActivity(browserIntent);
     }
     public void storeFeed(FeedViewHolder feedViewHolder){
@@ -109,7 +110,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
     }
 
     public void mailFeed(FeedViewHolder feedViewHolder){
-
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("application/image");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"share_with@friend.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Have a look on this");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Made by FlickReed : "+
+                feedViewHolder.getFeedItem().getLink().get(feedViewHolder.getFeedItem().getLink().size()-1).getHref());
+        context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
+    public void putData(List<FeedItem> data){
+        items.clear();
+        items.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void refresh(){
+        notifyDataSetChanged();
+    }
 }

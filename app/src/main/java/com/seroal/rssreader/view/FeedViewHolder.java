@@ -93,6 +93,10 @@ public class FeedViewHolder extends  RecyclerView.ViewHolder{
         feedItem = fi;
     }
 
+    public FeedItem getFeedItem(){
+        return feedItem;
+    }
+
     private FeedManageable feedManageable;
 
     public void inject(FeedManageable fm){
