@@ -132,20 +132,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     RecyclerViewAdapter feedAdapter = new RecyclerViewAdapter(lsFeeds);
-
-                    feedAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, FeedViewHolder feedViewHolder) {
-
-                            if (feedViewHolder != null)
-                                if (feedViewHolder.image.getDrawable() != null) {
-                                    BitmapDrawable drawable = (BitmapDrawable) feedViewHolder.image.getDrawable();
-                                    Bitmap bitmap = drawable.getBitmap();
-                                    StorageManager.storeImage(bitmap);
-                                    Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_LONG).show();
-                                }
-                        }
-                    });
                     rvFeed.setAdapter(feedAdapter);
                 }
                 else{
