@@ -1,16 +1,12 @@
 package com.seroal.rssreader.view;
 
-/**
- * Created by rouhalavi on 04/03/2017.
- */
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +20,11 @@ import com.seroal.rssreader.utils.StorageManageable;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+/**
+ * Created by rouhalavi on 04/03/2017.
+ *
+ */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
         implements View.OnClickListener, FeedManageable, ViewAdapter {
@@ -96,6 +97,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
 
     public void openFeed(FeedViewHolder feedViewHolder){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(feedViewHolder.getFeedItem().getLink().get(feedViewHolder.getFeedItem().getLink().size()-1).getHref()));
+        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         context.startActivity(browserIntent);
     }
     public void storeFeed(FeedViewHolder feedViewHolder){
@@ -110,13 +113,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<FeedViewHolder>
     }
 
     public void mailFeed(FeedViewHolder feedViewHolder){
-        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        emailIntent.setType("application/image");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"share_with@friend.com"});
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Have a look on this");
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Made by FlickReed : "+
-                feedViewHolder.getFeedItem().getLink().get(feedViewHolder.getFeedItem().getLink().size()-1).getHref());
-        context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        try {
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"share_with@friend.com"});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Have a look at this");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Made by FlickReed : " +
+                    feedViewHolder.getFeedItem().getLink().get(feedViewHolder.getFeedItem().getLink().size() - 1).getHref());
+            emailIntent = Intent.createChooser(emailIntent, "Send mail...");
+            emailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(emailIntent);
+        }
+        catch (Exception ex){
+            Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
+            Log.d("EMAIL",ex.getMessage());
+        }
     }
 
     public void putData(List<FeedItem> data){
