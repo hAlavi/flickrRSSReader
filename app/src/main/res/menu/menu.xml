@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <group android:checkableBehavior="single" android:id="@+id/sort_items_menu">
-        <item android:title="@string/sortByPublisher" android:id="@+id/sort_published_item"/>
+        <item android:title="@string/sortByPublisher" android:id="@+id/sort_published_item" />
         <item android:title="@string/sortByTitle"  android:id="@+id/sort_title_item"/>
         <item android:title="@string/sortByPubDate" android:id="@+id/sort_publisher_item"/>
         <item android:title="@string/sortByUpdDate" android:id="@+id/sort_update_item"/>
